@@ -14,6 +14,12 @@ def index(request):
         "listings": activeListings,
         "categories": allCategories
     })
+
+def listing(request, id):
+    listingData = Listing.objects.get(pk=id)
+    return render(request, "auctions/listing.html",{
+        "listing": listingData
+    })
  
 def displayCategory(request):
     if request.method == "POST":
