@@ -3,7 +3,7 @@
 {% block body %}
     <div class="container">
         {% if message %}
-            {% if updated %}
+            {% if update %}
                 <div class="alert alert-success" role="alert">
                     {{ message }}
             </div>
@@ -15,9 +15,20 @@
         {% endif %}
     </div>
 
+    {% if not listing.isActive and user == listing.price.user%}
+    <div class="alert alert-success" role="alert">
+        You have won the auction
+    </div>
+
 
     <div class="row mx-3">
-        {%if user.is_authenticated %}
+        {%if user.is_authenticated and listing.isActive %}
+            {% if isOwner %}
+                <form action="{% url 'closeAuction' id=listing.id %}" method="POST" class="mx-3">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">End Auction </button>
+                </form>
+            {% endif %}
             {% if isListingInWatchList%}
                 <form action="{% url 'removeWatchlist' id=listing.id %}" method="POST">
                     {% csrf_token %}
