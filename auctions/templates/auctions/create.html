@@ -2,7 +2,7 @@
 
 {% block body %}
     <h2>Create New Listing</h2>
-    {%csrf_token%}
+    1
     <form action="{% url 'create' %}" method="POST" >
         
         <div class="form-group">
@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <label for="price">Enter Price</label>
-            <input type="number" name="price" class="form-control" id="price" placeholder="Price">
+            <input type="number" min="0" name="price" class="form-control" id="price" placeholder="Price">
         </div>
         <div class="form-group">
             <label for="category">Choose a category</label>
